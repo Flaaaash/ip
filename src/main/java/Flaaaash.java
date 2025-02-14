@@ -92,31 +92,56 @@ public class Flaaaash {
                 break;
 
             case "mark":
-                markTask(Integer.parseInt(inputParts[1]));
+                try {
+                    markTask(Integer.parseInt(inputParts[1]));
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Invalid format! Use: mark <Task index>");
+                }
                 break;
 
             case "unmark":
+            try {
                 unmarkTask(Integer.parseInt(inputParts[1]));
                 break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid format! Use: unmark <Task index>");
+            }
+            break;
 
             case "todo":
-                addTask(new Todo(inputParts[1]));
+                if (inputParts.length < 2) {
+                    System.out.println("Task description cannot be empty.");
+                } else {
+                    addTask(new Todo(inputParts[1]));
+                }
                 break;
 
             case "deadline":
+            try {
                 String[] deadlineInputDetails = inputParts[1].split(" /by ", 2);
                 String deadlineName = deadlineInputDetails[0];
                 String deadLine = deadlineInputDetails[1];
                 addTask(new Deadline(deadlineName, deadLine));
                 break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid format! Use: deadline <description> /by <due_date>");
+            }
+            break;
+
 
             case "event":
+            try {
                 String[] eventInputDetails = inputParts[1].split(" /from | /to ", 3);
                 String eventName = eventInputDetails[0];
                 String from = eventInputDetails[1];
                 String to = eventInputDetails[2];
                 addTask(new Event(eventName, from, to));
                 break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid format! Use: event <description> /from <start_time> /to <end_time>");
+            }
+            break;
 
             default:
                 repeat(command);
