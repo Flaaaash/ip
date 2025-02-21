@@ -1,13 +1,18 @@
 public class Deadline extends Task {
-    protected String deadLine;
+    protected String deadline;
 
-    public Deadline(String taskName, String deadLine) {
+    public Deadline(String taskName, String deadline) {
         super(taskName);
-        this.deadLine = deadLine;
+        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadLine + ")";
+        return "[D]" + super.toString() + " (by: " + deadline + ")";
+    }
+
+    @Override
+    public String toFileString() {
+        return "D / " + (isDone ? "1" : "0") + " / " + taskName + " / " + deadline;
     }
 }

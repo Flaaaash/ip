@@ -1,9 +1,81 @@
+import java.util.Arrays;
 import java.util.Scanner;
+import java.io.*;
 
 public class Flaaaash {
     private static final int maxCount = 100;
     private static final Task[] tasks = new Task[maxCount];
     private static int taskCount = 0;
+    private static final String FILE_PATH = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Flaaaash.txt";
+
+    private static void saveToFile() {
+        try {
+            File file = new File(FILE_PATH);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            for(int i = 0; i < taskCount; i += 1) {
+                writer.write(tasks[i].toFileString());
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+    private static void loadFromFile() {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            return;
+        }
+
+        try {
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                String[] parts = line.split(" / ");
+
+                try {
+                    String type = parts[0];
+                    boolean isDone = parts[1].equals("1");
+                    String description = parts[2];
+
+                    switch (type) {
+                    case "T":
+                        Todo todo = new Todo(description);
+                        addTask(todo);
+                        if (isDone) {
+                            todo.markAsDone();
+                        }
+                        break;
+                    case "D":
+                        Deadline deadline = new Deadline(description, parts[3]);
+                        addTask(deadline);
+                        if (isDone) {
+                            deadline.markAsDone();
+                        }
+                        break;
+                    case "E":
+                        Event event = new Event(description, parts[3], parts[4]);
+                        addTask(event);
+                        if (isDone) {
+                            event.markAsDone();
+                        }
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid task type");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Skipping corrupted entry: " + line);
+                }
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, starting fresh.");
+        }
+    }
 
     private static void markTask(int index) {
         System.out.println("____________________________________________________________");
@@ -46,7 +118,7 @@ public class Flaaaash {
             System.out.println(" List is empty!");
         } else {
             System.out.println(" Here are the tasks in your list:");
-            for(int i = 0; i < taskCount; i += 1) {
+            for (int i = 0; i < taskCount; i += 1) {
                 System.out.println(" " + (i + 1) + ". " + tasks[i]);
             }
         }
@@ -67,12 +139,14 @@ public class Flaaaash {
     }
 
     private static void exit() {
+        saveToFile();
         System.out.println("____________________________________________________________");
         System.out.println(" Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
     }
     
     public static void main(String[] args) {
+        loadFromFile();
         greet();
         Scanner scanner = new Scanner(System.in);
 
