@@ -15,8 +15,8 @@ public class Flaaaash {
                 writer.write(task.toFileString());
                 writer.newLine();
             }
-
             writer.close();
+
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
         }
@@ -69,6 +69,7 @@ public class Flaaaash {
                     System.out.println("Skipping corrupted entry: " + line);
                 }
             }
+            
             fileScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found, starting fresh.");
@@ -126,6 +127,7 @@ public class Flaaaash {
         System.out.println("____________________________________________________________");
         if (tasks.isEmpty()) {
             System.out.println(" List is empty!");
+            System.out.println("____________________________________________________________");
         } else {
             System.out.println(" Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i += 1) {
