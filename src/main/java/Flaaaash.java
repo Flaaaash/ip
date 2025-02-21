@@ -119,8 +119,7 @@ public class Flaaaash {
     }
 
     private static void addTaskNoText(Task task) {
-        tasks[taskCount] = task;
-        taskCount += 1;
+        tasks.add(task);
     }
 
     private static void list() {
