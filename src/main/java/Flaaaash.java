@@ -44,21 +44,21 @@ public class Flaaaash {
                     switch (type) {
                     case "T":
                         Todo todo = new Todo(description);
-                        addTask(todo);
+                        addTaskNoText(todo);
                         if (isDone) {
                             todo.markAsDone();
                         }
                         break;
                     case "D":
                         Deadline deadline = new Deadline(description, parts[3]);
-                        addTask(deadline);
+                        addTaskNoText(deadline);
                         if (isDone) {
                             deadline.markAsDone();
                         }
                         break;
                     case "E":
                         Event event = new Event(description, parts[3], parts[4]);
-                        addTask(event);
+                        addTaskNoText(event);
                         if (isDone) {
                             event.markAsDone();
                         }
@@ -110,6 +110,11 @@ public class Flaaaash {
         System.out.println("    " + tasks[taskCount - 1]);
         System.out.println(" Now you have " + taskCount + " tasks in the list.");
         System.out.println("____________________________________________________________");
+    }
+
+    private static void addTaskNoText(Task task) {
+        tasks[taskCount] = task;
+        taskCount += 1;
     }
 
     private static void list() {
