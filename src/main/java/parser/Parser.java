@@ -5,6 +5,7 @@ import commands.DeadlineCommand;
 import commands.DeleteCommand;
 import commands.EventCommand;
 import commands.ExitCommand;
+import commands.FindCommand;
 import commands.HelpCommand;
 import commands.InvalidCommand;
 import commands.ListCommand;
@@ -59,6 +60,14 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 return new WrongFormatCommand("Invalid format! " +
                         "Use: event <description> /from <start_time> /to <end_time>");
+            }
+
+        case FindCommand.COMMAND_WORD:
+            try {
+                String keyword = inputParts[1];
+                return new FindCommand(keyword);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new WrongFormatCommand("Invalid format! Use: Find <keyword>");
             }
 
         case MarkCommand.COMMAND_WORD:
