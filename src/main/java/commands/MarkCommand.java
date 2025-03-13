@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * Mark the task specified by the user as done.
+ */
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";

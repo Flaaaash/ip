@@ -11,6 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Represents the file used to store task list data.
+ */
 public class StorageFile {
 
     public static final String DEFAULT_STORAGE_FILEPATH = System.getProperty("user.home")
@@ -22,6 +25,11 @@ public class StorageFile {
         this.path = Paths.get(DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * Saves the {@code TaskList} data to the storage file.
+     *
+     * @throws StorageOperationException if there were errors converting and/or storing data to file.
+     */
     public void save(TaskList taskList) throws StorageOperationException {
         try {
             List<String> encodedTaskList = TaskEncoder.encodeTaskList(taskList);
@@ -31,6 +39,12 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Loads the {@code TaskList} data from this storage file, and then returns it.
+     * Returns an empty {@code TaskList} if the file does not exist, or is not a regular file.
+     *
+     * @throws StorageOperationException if there were errors reading and/or converting data from file.
+     */
     public TaskList load() throws StorageOperationException {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();
@@ -43,13 +57,11 @@ public class StorageFile {
             // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
-        } catch (IllegalValueException ive) {
-            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
 
     /**
-     * Signals that some error has occured while trying to convert and read/write data between the application
+     * Signals that some error has occurred while trying to convert and read/write data between the application
      * and the storage file.
      */
     public static class StorageOperationException extends Exception {

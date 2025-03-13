@@ -1,5 +1,8 @@
 package data.task;
 
+/**
+ * Represents a Todo task without any specific date or time.
+ */
 public class Todo extends Task {
     public Todo(String taskName) {
         super(taskName);

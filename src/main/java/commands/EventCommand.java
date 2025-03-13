@@ -2,6 +2,9 @@ package commands;
 
 import data.task.Event;
 
+/**
+ * Adds an event task to the task list.
+ */
 public class EventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";
