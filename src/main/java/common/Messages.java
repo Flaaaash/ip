@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * Container for user visible messages.
+ */
 public class Messages {
 
     public static final String MESSAGE_WELCOME = "Hello! I'm Flaaaash, what can I do for you?";

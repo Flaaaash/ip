@@ -1,9 +1,16 @@
 package data.task;
 
+/**
+ * Represents a task with a name and completion status.
+ */
 public abstract class Task {
     protected String taskName;
     protected boolean isDone;
 
+    /**
+     * Constructs a new Task with the given task name.
+     * @param taskName Name of the task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
@@ -13,6 +20,10 @@ public abstract class Task {
         return taskName;
     }
 
+    /**
+     * Gets the status icon representing whether the task is done.
+     * @return "X" if done, otherwise a space " ".
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -30,5 +41,9 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + taskName;
     }
 
+    /**
+     * Returns the task formatted as a string for file storage.
+     * @return String representation for file storage.
+     */
     public abstract String toFileString();
 }

@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * Mark the task specified by the user as undone.
+ */
 public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";

@@ -14,9 +14,17 @@ import commands.TodoCommand;
 import commands.UnmarkCommand;
 import commands.WrongFormatCommand;
 
-
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     */
     public Command parseCommand(String userInput) {
         String[] inputParts = userInput.split(" ", 2);
         String commandWord = inputParts[0].toLowerCase();

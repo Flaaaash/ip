@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * Represents an invalid command. Upon execution, produces some feedback to the user.
+ */
 public class InvalidCommand extends Command {
 
     private final String invalidCommand;

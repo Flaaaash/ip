@@ -8,11 +8,11 @@ import static common.Messages.MESSAGE_GOODBYE;
 import static common.Messages.MESSAGE_INIT_FAILED;
 import static common.Messages.MESSAGE_WELCOME;
 
+/**
+ * Text UI of the application.
+ */
 public class TextUi {
     private static final String DIVIDER = "____________________________________________________________";
-
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     private final Scanner in;
     private final PrintStream out;
@@ -26,6 +26,10 @@ public class TextUi {
         this.out = out;
     }
 
+    /**
+     * Generates and prints the welcome message upon the start of the application.
+     * @param version current version of the application.
+     */
     public void showWelcomeMessage(String version) {
         showToUser(
                 DIVIDER,
@@ -34,6 +38,11 @@ public class TextUi {
                 DIVIDER);
     }
 
+    /**
+     * Prompts for the command and reads the text entered by the user.
+     * Echos the command back to the user.
+     * @return command (full line) entered by the user
+     */
     public String getUserCommand() {
         out.print("Enter command: ");
         String fullInputLine = in.nextLine().trim();
@@ -54,5 +63,6 @@ public class TextUi {
         showToUser(MESSAGE_GOODBYE);
     }
 
+    /** Shows message to the user when failed to initialise the program */
     public void showInitFailedMessage() { showToUser(MESSAGE_INIT_FAILED);}
 }
