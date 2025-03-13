@@ -5,6 +5,10 @@ import data.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Finds and lists all tasks in task list of which the name contains the argument keyword(s).
+ * Keyword matching is case-sensitive.
+ */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";

@@ -2,7 +2,9 @@ package commands;
 
 import data.task.Deadline;
 
-
+/**
+ * Adds a deadline task to the task list.
+ */
 public class DeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";

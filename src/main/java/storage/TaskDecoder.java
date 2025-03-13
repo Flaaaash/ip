@@ -10,16 +10,22 @@ import storage.StorageFile.StorageOperationException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Decodes the storage data file into an {@code TaskList} object.
+ */
 public class TaskDecoder {
 
     public static final Pattern TODO_DATA_FORMAT = Pattern.compile("T / [01] / .+");
 
+    /**
+     * Decodes {@code encodedTaskList} into an {@code TaskList} containing the decoded tasks.
+     *
+     * @throws StorageOperationException if the {@code encodedTaskList} is in an invalid format.
+     */
     public static TaskList decodeTaskList(List<String> encodedTasks)
-            throws IllegalValueException, StorageOperationException {
+            throws StorageOperationException {
         final List<Task> decodedTasks = new ArrayList<>();
         for (String encodedTask : encodedTasks) {
             decodedTasks.add(decodeTaskFromString(encodedTask));
@@ -27,8 +33,13 @@ public class TaskDecoder {
         return new TaskList(decodedTasks);
     }
 
+    /**
+     * Decodes {@code encodedTask} into a {@code Task}.
+     *
+     * @throws StorageOperationException if {@code encodedTask} is in an invalid format.
+     */
     private static Task decodeTaskFromString(String encodedTask)
-            throws IllegalValueException, StorageOperationException {
+            throws StorageOperationException {
         String[] encodedParts = encodedTask.split(" / ");
         try {
             String type = encodedParts[0];

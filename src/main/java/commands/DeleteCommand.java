@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * Deletes a task identified using its index in the task list.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
