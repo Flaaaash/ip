@@ -4,6 +4,12 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Delete the task with target index number.\n"
+            + " -Example: " + COMMAND_WORD
+            + " 1";
+
+
     private final int taskIndex;
 
     public DeleteCommand(int taskIndex) {

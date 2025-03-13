@@ -4,6 +4,11 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Mark the task with target index number as done.\n"
+            + " -Example: " + COMMAND_WORD
+            + " 1";
+
     public int taskIndex;
 
     public MarkCommand(int taskIndex) {

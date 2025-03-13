@@ -4,6 +4,12 @@ public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Mark the task with target index number as undone.\n"
+            + " -Example: " + COMMAND_WORD
+            + " 1";
+
+
     public int taskIndex;
 
     public UnmarkCommand(int taskIndex) {
