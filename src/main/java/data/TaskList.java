@@ -3,7 +3,6 @@ package data;
 import data.task.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TaskList {
@@ -40,5 +39,15 @@ public class TaskList {
 
     public List<Task> getAllTasks() {
         return this.tasks;
+    }
+
+    public List<Task> findMatch(String keyWork) {
+        List<Task> internalList = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTaskName().contains(keyWork)) {
+                internalList.add(task);
+            }
+        }
+        return internalList;
     }
 }
