@@ -35,11 +35,12 @@ Some example commands you can try:
 
 ## Features
 
-```
-:notebook_with_decorative_cover: Notes about the command format:
- - Words in UPPER_CASE are the parameters to be supplied by the user.
-   e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
-```
+
+Notes about the command format:
+ - Words in `UPPER_CASE` are the parameters to be supplied by the user.\
+   e.g. in `todo TASK_NAME`, `TASK_NAME` is a parameter which can be used as `todo Read a Book`.
+ - Parameters have a fixed order.
+   e.g. if the command specifies `/from START_TIME /to END_TIME`, no other order of input is acceptable.
 
 ## Feature XYZ
 

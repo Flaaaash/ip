@@ -13,7 +13,7 @@ import ui.TextUi;
 public class Flaaaash {
 
     /** Version info of the program. */
-    public final String VERSION = "Chatbot Flaaaash Version-2.0";
+    public final String VERSION = "Chatbot Flaaaash Version-0.2";
 
     private TextUi ui;
     private TaskList taskList;
