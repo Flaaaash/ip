@@ -32,6 +32,7 @@ Some example commands you can try:
 
 6. Refer to the Features below for details of each command.
 
+--------------------------------------------------------------------------
 
 ## Features
 
@@ -41,14 +42,74 @@ Notes about the command format:
    e.g. in `todo TASK_NAME`, `TASK_NAME` is a parameter which can be used as `todo Read a Book`.
  - Parameters have a fixed order.
    e.g. if the command specifies `/from START_TIME /to END_TIME`, no other order of input is acceptable.
+ - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, and `exit`) will be ignored.
+   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-## Feature XYZ
+### Viewing help : `help`
+Shows a message explaining all available commands.\
+Format: `help`
 
-// Feature details
+### Terminating the program : `exit`
+Exit the program.\
+Format: `exit`
 
+### Adding a todo task: `todo`
+Adds a task with no specified time constraints to the task list.\
+Format: `todo TASK_NAME`\
+Example:
+- `todo Read a book`
+- `todo Exercise`
 
-// A description of the expected outcome goes here
+### Adding a deadline task: `deadline`
+Adds a task with a deadline to the task list.\
+Format: `deadline TASK_NAME /by DEADLINE`\
+Example:
+- `deadline Return the book /by this Saturday`
+- `deadline Finish math homework /by tomorrow`
 
-```
-expected output
-```
+### Adding a event task: `event`
+Adds a task with a specified start time and end time to the task list.\
+Format: `event TASK_NAME /from START_TIME /to END_TIME`\
+Example:
+- `event Attend book fair /from 24th April 2025 2pm /to 4pm `
+
+### Listing all tasks : `list`
+Shows a list of all tasks in the task list.\
+Format: `list`
+
+### Finding tasks with specified keyword(s): `find`
+Finds tasks of which contents contain the given keywords.\
+Format: `find KEYWORD`
+- The search is case-insensitive. e.g read will match Read.
+- The order of the keywords **MATTERS**.
+- Only the task name is searched.
+
+### Deleting a task : delete
+Deletes the specified task from the task list.\
+Format: `delete INDEX`
+
+- Deletes the task at the specified INDEX.
+- The index refers to the index number shown in the task list (not applicable to the find list).
+- The index must be a positive integer.
+
+Examples:
+- `delete 2` deletes the 2nd task in the task list.
+
+### Marking a task as done : `mark`
+Mark a task as done.\
+Format: `mark INDEX`
+
+- Marks the task at the specified INDEX.
+- The index refers to the index number shown in the task list (not applicable to the find list).
+- The index must be a positive integer.
+
+### Marking a task as undone : `unmark`
+Mark a task as undone.\
+Format: `unmark INDEX`
+
+- Unmarks the task at the specified INDEX.
+- The index refers to the index number shown in the task list (not applicable to the find list).
+- The index must be a positive integer.
+
+## Saving the data
+Task List data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.

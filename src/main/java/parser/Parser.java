@@ -72,7 +72,7 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             try {
-                String keyword = inputParts[1];
+                String keyword = inputParts[1].trim().toLowerCase();
                 return new FindCommand(keyword);
             } catch (ArrayIndexOutOfBoundsException e) {
                 return new WrongFormatCommand("Invalid format! Use: Find <keyword>");

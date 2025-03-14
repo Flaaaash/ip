@@ -71,7 +71,7 @@ public class TaskList {
     public List<Task> findMatch(String keyword) {
         List<Task> internalList = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getTaskName().contains(keyword)) {
+            if (task.getTaskName().toLowerCase().contains(keyword)) {
                 internalList.add(task);
             }
         }
