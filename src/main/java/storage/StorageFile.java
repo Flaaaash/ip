@@ -16,13 +16,22 @@ import java.util.List;
  */
 public class StorageFile {
 
-    public static final String DEFAULT_STORAGE_FILEPATH = System.getProperty("user.home")
-            + File.separator + "Desktop" + File.separator + "Flaaaash.txt";
-
     public final Path path;
 
-    public StorageFile() {
-        this.path = Paths.get(DEFAULT_STORAGE_FILEPATH);
+    public StorageFile(String filePath) {
+        this.path = Paths.get(filePath);
+        createLocalStorage();
+    }
+
+    private void createLocalStorage() {
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating file: " + e.getMessage());
+        }
     }
 
     /**
@@ -31,6 +40,7 @@ public class StorageFile {
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
     public void save(TaskList taskList) throws StorageOperationException {
+
         try {
             List<String> encodedTaskList = TaskEncoder.encodeTaskList(taskList);
             Files.write(path, encodedTaskList);

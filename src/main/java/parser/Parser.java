@@ -41,70 +41,141 @@ public class Parser {
             return new ListCommand();
 
         case TodoCommand.COMMAND_WORD:
-            try {
-                return new TodoCommand(inputParts[1]);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Task description cannot be empty.");
-            }
+            return prepareAddTodo(inputParts[1]);
 
         case DeadlineCommand.COMMAND_WORD:
-            try {
-                String[] deadlineInputDetails = inputParts[1].split(" /by ", 2);
-                String taskName = deadlineInputDetails[0];
-                String deadline = deadlineInputDetails[1];
-                return new DeadlineCommand(taskName, deadline);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Invalid format! " +
-                        "Use: deadline <description> /by <due_time>");
-            }
+            return prepareAddDeadline(inputParts[1]);
 
         case EventCommand.COMMAND_WORD:
-            try {
-                String[] eventInputDetails = inputParts[1].split(" /from | /to ", 3);
-                String taskName = eventInputDetails[0];
-                String from = eventInputDetails[1];
-                String to = eventInputDetails[2];
-                return new EventCommand(taskName, from, to);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Invalid format! " +
-                        "Use: event <description> /from <start_time> /to <end_time>");
-            }
+            return prepareAddEvent(inputParts[1]);
 
         case FindCommand.COMMAND_WORD:
-            try {
-                String keyword = inputParts[1].trim().toLowerCase();
-                return new FindCommand(keyword);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Invalid format! Use: Find <keyword>");
-            }
+            return prepareFind(inputParts[1]);
 
         case MarkCommand.COMMAND_WORD:
-            try {
-                int taskIndex = Integer.parseInt(inputParts[1]);
-                return new MarkCommand(taskIndex);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Invalid format! Use: mark <Task index>");
-            }
+            return prepareMark(inputParts[1]);
 
         case UnmarkCommand.COMMAND_WORD:
-            try {
-                int taskIndex = Integer.parseInt(inputParts[1]);
-                return new UnmarkCommand(taskIndex);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Invalid format! Use: unmark <Task index>");
-            }
+            return prepareUnmark(inputParts[1]);
 
         case DeleteCommand.COMMAND_WORD:
-            try {
-                int taskIndex = Integer.parseInt(inputParts[1]);
-                return new DeleteCommand(taskIndex);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new WrongFormatCommand("Invalid format! Use: delete <Task index>");
-            }
+            return prepareDelete(inputParts[1]);
 
         default:
             return new InvalidCommand(commandWord);
         }
 
     }
+
+    /**
+     * Parses arguments in the context of the todo command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareAddTodo(String args) {
+        try {
+            return new TodoCommand(args);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Task description cannot be empty.");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the deadline command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareAddDeadline(String args) {
+        try {
+            String[] deadlineInputDetails = args.split(" /by ", 2);
+            String taskName = deadlineInputDetails[0];
+            String deadline = deadlineInputDetails[1];
+            return new DeadlineCommand(taskName, deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Invalid format! " +
+                    "Use: deadline <description> /by <due_time>");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the event command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareAddEvent(String args) {
+        try {
+            String[] eventInputDetails = args.split(" /from | /to ", 3);
+            String taskName = eventInputDetails[0];
+            String from = eventInputDetails[1];
+            String to = eventInputDetails[2];
+            return new EventCommand(taskName, from, to);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Invalid format! " +
+                    "Use: event <description> /from <start_time> /to <end_time>");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the find command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareFind(String args) {
+        try {
+            String keyword = args.trim().toLowerCase();
+            return new FindCommand(keyword);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Invalid format! Use: Find <keyword>");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the mark command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareMark(String args) {
+        try {
+            int taskIndex = Integer.parseInt(args);
+            return new MarkCommand(taskIndex);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Invalid format! Use: mark <Task index>");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the unmark command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareUnmark(String args) {
+        try {
+            int taskIndex = Integer.parseInt(args);
+            return new UnmarkCommand(taskIndex);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Invalid format! Use: unmark <Task index>");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the delete command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    public Command prepareDelete(String args) {
+        try {
+            int taskIndex = Integer.parseInt(args);
+            return new DeleteCommand(taskIndex);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new WrongFormatCommand("Invalid format! Use: delete <Task index>");
+        }
+    }
+
 }

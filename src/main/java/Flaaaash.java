@@ -14,6 +14,7 @@ public class Flaaaash {
 
     /** Version info of the program. */
     public final String VERSION = "Chatbot Flaaaash Version-0.2";
+    public static final String DEFAULT_STORAGE_FILEPATH = "./data/Flaaaash.txt";
 
     private TextUi ui;
     private TaskList taskList;
@@ -34,12 +35,12 @@ public class Flaaaash {
     public void start() {
         try {
             this.ui = new TextUi();
-            this.storage = new StorageFile();
-            this.taskList = storage.load();
             ui.showWelcomeMessage(VERSION);
+            this.storage = new StorageFile(DEFAULT_STORAGE_FILEPATH);
+            this.taskList = storage.load();
         } catch (StorageOperationException e) {
             ui.showInitFailedMessage();
-            throw new RuntimeException(e);
+            this.taskList = new TaskList();
         }
     }
 
