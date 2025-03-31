@@ -1,5 +1,0 @@
-T / 1 / Submit
-E / 0 / Final exam / 29 April 2025 2:00pm / 4:00pm
-T / 0 / test
-D / 0 / test / test
-E / 0 / something / 1pm / 2pm
